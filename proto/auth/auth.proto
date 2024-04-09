@@ -24,13 +24,6 @@ message User {
     // string lastLogin = 6;
 }
 
-// Структура Error
-message Error {
-    int32 code = 1;
-    string error = 2;
-}
-
-
 // Объект, который отправляется при вызове RPC-метода (ручки) Register.
 message RegisterRequest {
     string username = 1;
@@ -40,7 +33,6 @@ message RegisterRequest {
 // Объект, который получаем при вызове RPC-метода (ручки) Register.
 message RegisterResponse {
     bool success = 1;
-    optional Error error = 2;
 }
 
 message LoginRequest {
@@ -50,7 +42,6 @@ message LoginRequest {
 
 message LoginResponse {
     string token = 1;
-    optional Error error = 2;
 }
 
 message ChangePasswordRequest {
@@ -61,7 +52,6 @@ message ChangePasswordRequest {
 
 message ChangePasswordResponse {
     bool success = 1;
-    optional Error error = 2;
 }
 
 message ChangeUsernameRequest {
@@ -71,7 +61,6 @@ message ChangeUsernameRequest {
 
 message ChangeUsernameResponse {
     bool success = 1;
-    optional Error error = 2;
 }
 
 message MeRequest {
@@ -80,5 +69,4 @@ message MeRequest {
 
 message MeResponse {
     User user = 1;
-    optional Error error = 2;
 }
