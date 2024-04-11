@@ -9,6 +9,7 @@ service AuthService {
     rpc Login (LoginRequest) returns (LoginResponse);
     rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
     rpc ChangeUsername (ChangeUsernameRequest) returns (ChangeUsernameResponse);
+    rpc ResetPassword (ResetPasswordRequest) returns (ResetPasswordResponse);
     rpc Me (MeRequest) returns (MeResponse);
 };
 
@@ -17,17 +18,18 @@ service AuthService {
 // Структура User
 message User {
     int32 id = 1;
-    string username = 2;
+    string email = 2;
+    string username = 3;
     // string createdAt = 3;
     // string lastPasswordChange = 4;
     // string lastUsernameChange = 5;
-    // string lastLogin = 6;
 }
 
 // Объект, который отправляется при вызове RPC-метода (ручки) Register.
 message RegisterRequest {
-    string username = 1;
-    string password = 2;
+    string email = 1;
+    string username = 2;
+    string password = 3;
 }
 
 // Объект, который получаем при вызове RPC-метода (ручки) Register.
@@ -36,8 +38,9 @@ message RegisterResponse {
 }
 
 message LoginRequest {
-    string username = 1;
+    string email = 1;
     string password = 2;
+    int32 app_id = 3;
 }
 
 message LoginResponse {
@@ -46,8 +49,7 @@ message LoginResponse {
 
 message ChangePasswordRequest {
     string token = 1;
-    string oldPassword = 2;
-    string newPassword = 3;
+    string newPassword = 2;
 }
 
 message ChangePasswordResponse {
@@ -60,6 +62,14 @@ message ChangeUsernameRequest {
 }
 
 message ChangeUsernameResponse {
+    bool success = 1;
+}
+
+message ResetPasswordRequest {
+    string email = 1;
+}
+
+message ResetPasswordResponse {
     bool success = 1;
 }
 
